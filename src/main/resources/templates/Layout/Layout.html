@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="UTF-8"></meta>
+<!-- Bootstrap -->
+<link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"
+	rel="stylesheet"></link>
+<script th:src="@{/webjars/jquery/2.0.3/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+<!-- CSS読込 -->
+<link th:href="@{/css/home.css}" rel="stylesheet"></link>
+
+
+
+<title>Home</title>
+</head>
+<body>
+	<!--  ヘッダー   -->
+	<nav class="navbar navbar-inverse navbar-fixed-top ">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" th:href="@{/announcements}">共用施設予約システム</a>
+			</div>
+			<a th:href="@{/logout}">
+				<button class="btn btn-link pull-right navbar-brand" type="submit">
+					ログアウト</button>
+			</a>
+		</div>
+	</nav>
+	<!--  ヘッダー   -->
+
+
+	<!--  サイドバー  -->
+	<div class="container-xxl" style="text-align: center">
+		<div class="col-sm-2 sidebar">
+			<ul class="nav flex-column">
+				<br>
+				<!-- 画像 -->
+				<img th:src="@{/images/user_icon.jpg}"sec:authorize="hasAuthority('USER')" class="profile-user">
+				<img th:src="@{/images/ax_city_manshion_01.png}" sec:authorize="hasAuthority('ADMIN')" class="profile-admin">
+				<div style="text-align: center">
+					<h4 th:text="'ユーザー名：' + ${#httpServletRequest.remoteUser}"></h4><br>
+					<div>
+						<h5 sec:authorize="hasAuthority('ADMIN')">役割：管理者</h5>
+					</div>
+					<div>
+						<h5 sec:authorize="hasAuthority('USER')">役割：ユーザー</h5>
+					</div>
+				</div>
+				
+				<div>
+					<a th:href="@{/user_info/edit}"
+						class="btn btn-primary btn-sm shadow-sm me-2"sec:authorize="hasAuthority('USER')">プロフィール編集</a>
+					<form th:action="@{/user_info/show}" method="get">
+						<br>
+						<button type="submit" class="btn btn-success btn-sm shadow-sm"sec:authorize="hasAuthority('USER')">ユーザー情報詳細</button>
+					</form>
+				</div>				
+				<hr>
+				<!----------------------------------  ユーザー専用メニュー  ------------------------------------>
+				<li class="nav-item"sec:authorize="hasAuthority('USER')">
+				    <h4>メニューバー</h4>
+				    <a th:href="@{/announcements}" class="border-bottom">トップ</a>
+					<a th:href="@{/Schedule}"class="border-bottom">予約状況</a>
+					<a th:href="@{/meetings/RequestList}"class="border-bottom">予約申請履歴</a>
+				　  <a th:href="@{/ContactForm}"class="border-bottom">問い合わせ</a>
+				</li>
+				<!----------------------------------  ユーザー専用メニュー  ------------------------------------>
+
+
+
+				<!--------------------------------- 管理者用表示メニュー --------------------------------------->
+				<li class="nav-item"sec:authorize="hasAuthority('ADMIN')" >
+				  <a th:href="@{'/announcements'}"class="border-bottom">トップ</a>
+				  <a th:href="@{/Schedule}"class="border-bottom">予約状況</a>
+				  <a th:href="@{/meetings/admin}"class="border-bottom">予約申請リスト</a>
+				  <a th:href="@{'/users/UserCreate'}"class="border-bottom">ユーザー登録</a> 
+				  <a th:href="@{'/users'}"class="border-bottom">登録ユーザー一覧</a>
+				  <a th:href="@{'/announcements/comment-new'}"class="border-bottom">掲示板投稿</a> 				   				  
+				</li>
+				<!--------------------------------- 管理者用表示メニュー --------------------------------------->
+			</ul>
+		</div>
+	</div>
+
+
+	<!--  コンテンツ表示部分  -->
+	<div class="container-fixed">
+		<div>
+			<div class="col-sm-8 col-sm-offset-1 ">
+				<div layout:fragment="contents"></div>
+			</div>
+		</div>
+	</div>
+	<!--  コンテンツ表示部分  -->
+
+
+</body>
+</html>

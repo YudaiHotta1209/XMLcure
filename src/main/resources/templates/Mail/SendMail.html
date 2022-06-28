@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="Layout/Layout">
+<head>
+  <meta charset="utf-8"  content="text/html" >
+  <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+  <script th:src="@{/webjars/jquery/2.0.3/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+  <script src="js/script.js"></script>
+  <title>お問い合わせ</title>
+</head>
+<body>
+
+  <div layout:fragment="contents">
+     <div class="container">
+  <div class="title">
+       <h1>お問い合わせ入力フォーム</h1>
+  </div>
+  <br>
+       <div style="text-align:center">
+        <p>以下を入力して送信ボタンをクリックしてください。</p>
+       </div>
+         <form name="contactform" id="contactform" role="form">
+<!-- 　お名前フォームフォーム  --> 
+           <div class="form-group">
+             <label for="inputName" class="col-sm-3">お名前<span class="label label-danger">必須</span></label>
+             <div class="col-sm-6">
+               <input type="text" class="form-control" name="name" placeholder="お名前" value="">
+            </div>
+           </div>
+           <br>
+           <hr>          
+<!-- 　メールアドレス入力フォーム  -->
+           <div class="form-group">
+             <label for="inputEmail" class="col-sm-3">メールアドレス<span class="label label-danger">必須</span></label>
+             <div class="col-sm-6">
+               <input type="email" class="form-control" name="email" placeholder="メールアドレス" value="">
+             </div>
+           </div>
+           <br>
+           <hr>
+<!-- 　お問い合わせ内容入力フォーム  -->           
+           <div class="form-group">
+             <label for="inputMessage" class="col-sm-3">お問い合わせ内容<span class="label label-danger">必須</span></label>
+             <div class="col-sm-9">
+               <textarea class="form-control" name="message" rows="5"placeholder="お問い合わせ内容">
+               </textarea>
+             </div>
+           </div>
+           <br>
+           <hr>           
+           
+           
+           <div class="text-center">
+             <button type="button" name="btnSubmit" 
+                     class="btn btn-success" id="btnSend">送信する</button>
+           </div>
+           
+         </form>
+       </div>
+     </div>
+</body>
+</html>

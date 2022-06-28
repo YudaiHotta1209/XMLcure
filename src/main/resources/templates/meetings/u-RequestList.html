@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="Layout/Layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+<link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"	rel="stylesheet"></link>
+<script th:src="@{/webjars/jquery/2.0.3/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+
+<link rel='stylesheet' href='css/UserMeetingList.css' type='text/css' />
+<script type='text/javascript' src='js/UserMeetingList.js'></script>
+<title>予約履歴</title>
+</head>
+
+
+
+
+<body>
+	<div layout:fragment="contents">
+
+
+		<div class="container">
+			<div class="card card-primary mb-3">
+			  <div class="title">
+				<h1>申請リスト</h1>
+              </div>
+						<!-- 登録件数が0件の場合（meeting.siza(0)に表示される-->
+						<div class="card-body" th:if="!${meeting_info.size()}">
+							<p>予約リクエストがありません。</p>
+						</div>
+
+						<table class="table table-striped" th:if="${meeting_info.size()}">
+
+
+
+							<thead>
+								<tr>
+									<!-- 表示内容一部省略→全登録内容を知りたい場合は詳細画面へ -->
+									<th style="width: 10%">部屋番号</th>
+									<th style="width: 10%">利用者名</th>
+									<th style="width: 10%">利用開始日時間</th>
+									<th style="width: 10%">利用予定人数</th>
+									<th style="width: 30%">用途</th>
+									<th style="width: 10%">承認状況</th>
+									<th style="width: 30%">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="meeting_info: ${meeting_info}"
+									th:object="${meeting_info}">
+									<!-- 表示内容一部省略→全登録内容を知りたい場合は詳細画面へ -->
+									<td th:text="*{roomid}"></td>
+									<td th:text="*{owner}"></td>
+									<td th:text="*{start}"></td>
+									<td th:text="*{people}"></td>
+									<td th:text="*{title}"></td>
+									<td th:text="*{admincomment}"></td>
+									<td class="float-right">
+										<form th:action="@{/meetings/{id}(id=*{id})}"th:method="delete">
+											<a class="btn btn-primary"th:href="@{/meetings/{id}(id=*{id})}">詳細</a> 
+											<a	class="btn btn-primary"th:href="@{/meetings/{id}/edit(id=*{id})}">変更</a>
+											<button class="btn btn-primary">削除</button>
+										</form>
+									</td>
+								</tr>
+							</tbody>
+
+
+
+						</table>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+</body>
+</html>

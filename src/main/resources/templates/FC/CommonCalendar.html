@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="Layout/Layout">
+<head>
+<title>予約状況カレンダー</title>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"	rel="stylesheet"></link>
+  <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+  <link rel='stylesheet' id='calendar-style-css' href='css/main.css' type='text/css' />
+  <script type='text/javascript' src='js/main.js'></script>
+  <script type='text/javascript' src='js/ja.js'></script>
+</head>
+<body>
+  <div layout:fragment="contents">
+    <div class="container">
+  <div class="title">
+       <h1 style="text-align:center">予約状況</h1>
+  </div>
+    		<div class="card-header">
+  				<h5 class="card-title">申請はこちらから→<a href="/meetings/new" class="btn btn-success float-right">利用申し込み</a></h5>
+  			</div>
+  
+	<div id='calendar'></div>
+
+	<!-- 対象のdiv要素よりあとにscript配置 -->
+	<script>
+		document
+				.addEventListener(
+						'DOMContentLoaded',
+						function() {
+							var calendarEl = document
+									.getElementById('calendar');
+							var calendar = new FullCalendar.Calendar(
+									calendarEl,
+									{
+										locale: 'ja',/* 日本語化 */
+										
+										dayCellContent: function(e) {
+										    e.dayNumberText = e.dayNumberText.replace('日', '');
+										},
+										buttonText: {
+										    today: '今月',
+										    month: '月',
+										    list: 'リスト'
+										},
+										
+										headerToolbar : {
+											left : 'prev,next today',
+											center : 'title',
+											right : 'dayGridMonth,listYear'
+										},
+
+										displayEventTime : true,
+										displayEventEnd: true,
+										timeFormat: "HH:mm", // イベントの時刻フォーマット
+										googleCalendarApiKey : 'AIzaSyDcb8Wa4Ct4FYhT1OPE_lHhvDSugP531Xs',
+										events : 'reservingtest0420@gmail.com',
+
+										eventClick : function(arg) {
+											window.open(arg.event.url,
+													'google-calendar-event',
+													'width=700,height=600');
+											arg.jsEvent.preventDefault()
+										},
+									      events: {								              								             
+									          url : '/Calendar/Reserving'
+									        },
+									});
+							calendar.render();
+						});
+	</script>
+	</div>
+  </div>
+</body>
+</html>

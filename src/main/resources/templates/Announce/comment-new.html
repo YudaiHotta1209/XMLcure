@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="~{Layout/Layout}">
+<head>
+<meta charset="utf-8" />
+<title>掲示板新規投稿</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"></link>
+    <script th:src="@{/webjars/jquery/2.0.3/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+  <div layout:fragment="contents">
+  <div class="container">
+    <div class="card card-primary mb-3">
+        <div class="title">
+            <h1>入力フォーム</h1>
+        </div>
+        <br>
+            <br>
+            <form th:method="post" th:action="@{/announcements}" th:object="${announce_info}"> 
+                                                                      
+<!-- 　日時選択フォームフォーム Model名＝day_post  -->          
+                <div class="form-group row">
+                    <label class="col-md-4 control-label"><span class="label label-danger">必須</span>投稿日時</label>
+                    <div class="col-md-3">
+                      <input class="form-control" type="datetime-local" name="daypost"   th:value="*{daypost}"placeholder="投稿日時"/>
+                      <div class="text-danger" th:if="${#fields.hasErrors('daypost')}" th:errors="*{daypost}"></div>
+                    </div>
+                </div>   
+                <hr>                
+<!-- 　お知らせ内容入力フォーム Model名＝message -->     
+                <div class="form-group row">
+                    <label class="col-md-4 control-label"><span class="label label-danger">必須</span>お知らせ内容</label>
+
+                    <div class="col-md-8">
+                      <input class="form-control" type="text" name="message" th:value="*{message}" placeholder="掲示板へ投稿する内容をご入力ください"/>
+                      <div class="text-danger" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></div>
+                    </div>
+                </div>     
+                <hr>        
+<!--  DB送信用ボタン  -->                                 
+                <div class="form-group row">
+                    <div class="offset-md-2 col-md-10">
+                      <button class="btn btn-primary">掲示板へ投稿する</button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+      </div>
+    </div>
+ 
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ログイン</title>
+<link	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"	rel="stylesheet">
+</head>
+<body>
+	<div class="text-center">
+		<h1>本当にログアウトしますか？</h1>
+		<form method="post" th:action="@{/logout}">
+			<button class="btn btn-primary" type="submit">ログアウト</button>
+		</form>
+	</div>
+
+</body>
+</html>

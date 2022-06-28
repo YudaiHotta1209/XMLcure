@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="~{Layout/Layout}">
+       
+       
+<head>
+<meta charset="utf-8" />
+<title>詳細ページ</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"></link>
+    <script th:src="@{/webjars/jquery/2.0.3/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+    <div layout:fragment="contents">
+	<div class="container">
+		<div class="card card-primary mb-3">
+		       <div class="card-header">
+		        	<h1>申請内容詳細</h1>		
+			   </div>
+			<div class="card-body">
+		        <div th:object="${meeting_info}">
+		        <table class="table table-bordered">
+                 <!--  入力項目 -->        
+                  <thead>
+                      <tr>          
+                       <th scope="row">項目</th>
+                       <th scope="col">登録情報</th>
+                      </tr>
+                  </thead>
+                 <tbody>		        	        
+　　　　　　　　<!--  部屋番号 Model名＝roomid  -->
+                   <tr>
+                     <th ><label class="col-md-4">集会室番号</label></th>
+                   <td>   		        
+		        	<div class="form-group row">		        		
+						<div class="col-md-10" th:text="*{roomid}"></div>
+		          	</div>
+		          	
+		        <!--  ID入力  Model名＝username --> 
+                   <tr>
+                     <th scope="row"><label class="col-md-6 control-label">ユーザーID</label></th>
+                   <td>		           	
+		          	<div class="form-group row">		            	
+		            	<div class="col-md-10 form-control-static" th:text="*{username}"></div>
+		          	</div>
+		          	
+		        <!--  利用者名入力 Model名＝owner  -->
+                   <tr>
+                     <th scope="row"><label class="col-md-6 control-label">利用者名</label></th>
+                   <td>		           	
+		          	<div class="form-group row">		            	
+		            	<div class="col-md-10 form-control-static" th:text="*{owner}"></div>
+		          	</div>		          
+		        <!-- 　利用開始時間 Model名＝start  -->
+                   <tr>
+                     <th scope="row"><label class="col-md-6 control-label">利用開始時間</label></th>
+                   <td>  	
+		          	<div class="form-group row">		            	
+		            	<div class="col-md-10 form-control-static" th:text="*{start}"></div>
+		          	</div>
+		          	
+		        <!-- 　利用終了時間 Model名＝end  -->
+                   <tr>
+                     <th scope="row"><label class="col-md-6 control-label">利用終了時間</label></th>
+                   <td>		           	
+		          	<div class="form-group row">		            	
+		            	<div class="col-md-10 form-control-static" th:text="*{end}"></div>
+		          	</div>		          			          			
+		          	          			          	
+		        <!--  用途選択 Model名＝purpose  -->
+                   <tr>
+                     <th scope="row"><label class="col-md-3 control-label">用途</label></th>
+                   <td>		        		           	
+		          	<div class="form-group row">		            	
+		            	<div class="col-md-10 form-control-static" th:text="*{title}"></div>
+		          	</div>		          			          
+       　　   	<!--  利用予定人数 Model名＝people  -->
+                   <tr>
+                     <th scope="row"><label class="col-md-6 control-label">利用予定人数</label></th>
+                   <td>       
+		          	<div class="form-group row">		            	
+		            	<div class="col-md-10 form-control-static" th:text="*{people}"></div>
+		          	</div>
+		          	
+		        <!-- 　備考欄入力 Model名＝remarks --> 
+                   <tr>
+                     <th scope="row"><label class="col-md-3 control-label">備考欄</label></th>
+                   <td> 	
+		          	<div class="form-group row">		            	
+		            	<div class="col-md-10 form-control-static" th:text="*{remarks}"></div>
+		          	</div>		
+		          	
+		        <!-- 　備考欄入力 Model名＝admin_comment -->
+                   <tr>
+                     <th scope="row"><label class="col-md-4 control-label">承認状況</label></th>
+                   <td>		          	
+		          	<div class="form-group row">		            	
+		            	<div class="col-md-10 form-control-static" th:text="*{admincomment}"></div>
+		          	</div>
+		          	</tbody>			          	
+		          </table>			          			          			          	
+				</div>
+			</div>
+		</div>
+    </div>
+    </div>
+</body>
+</html>

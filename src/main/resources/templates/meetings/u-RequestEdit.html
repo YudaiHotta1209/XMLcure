@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="~{Layout/Layout}">
+<head>
+<meta charset="utf-8" />
+<title>新規登録ページ</title>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"></link>
+    <script th:src="@{/webjars/jquery/2.0.3/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+    <div layout:fragment="contents">
+	<div class="container">	
+		<div class="card card-primary mb-3">  			
+		　　<div class="card-body">
+            <h5 >入力フォーム</h5>
+            		<form th:action="@{/meetings/{id}(id=*{id})}" th:method="put" th:object="${meeting_info}">
+              <table class="table table-bordered">
+  <!--  入力項目 -->        
+                  <thead>
+                      <tr>          
+                       <th scope="row">入力項目</th>
+                       <th scope="col">入力欄</th>
+                      </tr>
+                  </thead>
+                <tbody>
+<!--  部屋番号選択フォーム Model名＝roomid  -->       
+                   <tr>
+                     <th scope="row"><span class="label label-danger">必須</span><label class="col-md-4 control-label">集会室番号</label></th>
+                   <td>    
+               <div class="form-group row">                   
+                      <div class="col-md-5">
+                        <select class="form-select form-select-sm" aria-label=".form-select-lg example" name="roomid" th:value="*{roomid}" >
+                           <option selected>部屋番号</option>
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                         </select>  
+                         <div th:if="${#fields.hasErrors('roomid')}" th:errors="*{roomid}"></div>
+                       </div>                    
+               </div>               
+               </td>
+                                   
+<!--  ID入力フォーム  Model名＝username -->             
+                   <tr>
+                     <th scope="row"><span class="label label-danger">必須</span><label class="col-md-4 control-label">ユーザーID</label></th>
+                   <td>     
+                <div class="form-group row">                  
+                    <div class="col-md-4">
+                      <input class="form-control" type="text" name="username" th:value="*{username}"placeholder="ユーザーID"/>
+                      <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                    </div>
+                </div>
+                </td>             
+<!--  利用者名入力フォーム Model名＝owner  -->            
+                   <tr>
+                     <th scope="row"><span class="label label-danger">必須</span><label class="col-md-4 control-label">利用者名</label></th>
+                   <td>      
+                <div class="form-group row">         
+                    <div class="col-md-4">
+                      <input class="form-control" type="text" name="owner" th:value="*{owner}"placeholder="利用者名"/>
+                      <div class="text-danger" th:if="${#fields.hasErrors('owner')}" th:errors="*{owner}"></div>
+                    </div>
+                </div>   
+                </td>                                       
+<!-- 　日時選択フォームフォーム Model名＝daytime  -->  
+                   <tr>
+                     <th scope="row"><span class="label label-danger">必須</span><label class="col-md-4 control-label">利用開始日時</label></th>
+                   <td>       
+                <div class="form-group row">                    
+                    <div class="col-md-3">
+                      <input class="form-control" type="datetime-local" name="start" min=YYYY-MM-DDT09:00 max=YYYY-MM-DDT17:00 step="3600" th:value="*{start}"placeholder="利用開始日時"/>
+                      <div class="text-danger" th:if="${#fields.hasErrors('start')}" th:errors="*{start}"></div>
+                    </div>
+                </div>   
+                </td>
+<!-- 　日時選択フォームフォーム Model名＝daytime  -->       
+                   <tr>
+                     <th scope="row"><span class="label label-danger">必須</span><label class="col-md-4 control-label">利用終了日時</label></th>
+                   <td>   
+                <div class="form-group row">                   
+                    <div class="col-md-3">
+                      <input class="form-control" type="datetime-local" name="end" min=YYYY-MM-DDT09:00 max=YYYY-MM-DDT17:00 step="3600" th:value="*{end}"placeholder="利用終了日時"/>
+                      <div class="text-danger" th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></div>
+                    </div>
+                </div>                   
+                </td>                      
+<!--  用途選択フォーム Model名＝purpose  -->    
+                   <tr>
+                     <th scope="row"><span class="label label-danger">必須</span><label class="col-md-4 control-label">用途</label></th>
+                   <td>               
+                <div class="form-group">                   
+                    <div class="col-md-5">
+                        <select class="form-select form-select-sm" aria-label=".form-select-lg example"  name="title" th:value="*{title}" >
+                        <option selected>用途選択</option>
+                            <option value="打合せ">打合せ</option>
+                            <option value="自治会・子供会">自治会・子供会</option>
+                            <option value="お稽古事">お稽古事</option>
+                            <option value="理事会">理事会</option>
+                        </select>
+                    </div>
+                </div>                           
+                </td>
+<!--  利用予定人数入力フォーム Model名＝people  --> 
+                   <tr>
+                     <th scope="row"><span class="label label-danger">必須</span><label class="col-md-4 control-label">利用予定人数</label></th>
+                   <td>                   
+                <div class="form-group row">
+                    <div class="col-md-4">
+                      <input class="form-control" type="text" name="people" th:value="*{people}" placeholder="利用予定人数"/>
+                      <div class="text-danger" th:if="${#fields.hasErrors('people')}" th:errors="*{people}"></div>
+                    </div>
+                </div>            
+                </td>
+                
+<!-- 　備考欄入力フォーム Model名＝remarks --> 
+                   <tr>
+                     <th scope="row"><span class="label label-primary">任意</span><label class="col-md-4 control-label">備考欄</label></th>
+                   <td>    
+                <div class="form-group row">                    
+                    <div class="col-md-10">
+                      <input class="form-control" type="text" name="remarks" th:value="*{remarks}" placeholder="備考欄へは管理事務所へ要望事項がある場合のみ入力ください。"/>
+                      <div class="text-danger" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+                    </div>
+                </div>            
+                 </td>
+                    </tbody>
+                  </table>               
+	        		<div class="form-group row">
+	          			<div class="offset-md-2 col-md-9">
+	            			<button class="btn btn-primary">更新</button>
+	            		</div>
+	          		</div>
+	          </form>
+	      </div>
+		</div>
+	</div>
+	</div>
+</body>
+</html>
