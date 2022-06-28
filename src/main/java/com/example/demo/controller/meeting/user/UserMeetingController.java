@@ -100,7 +100,7 @@ public class UserMeetingController {
 	@DeleteMapping("{id}")
 	public String delete(@PathVariable Long id) {
 		userMeetingService.delete(id);
-		return "redirect:/meetings/u-RequestList";
+		return "redirect:/meetings/RequestList";
 	}
 
 //－－－－－－－－－－－－－－－－－－CRUD処理－－－－－－－－－－－－－－－－－－－－//	
