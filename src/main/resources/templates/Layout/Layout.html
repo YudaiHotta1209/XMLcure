@@ -53,9 +53,9 @@
 				</div>
 				
 				<div>
-					<a th:href="@{/user_info/edit}"
+					<a th:href="@{/user-info/edit}"
 						class="btn btn-primary btn-sm shadow-sm me-2"sec:authorize="hasAuthority('USER')">プロフィール編集</a>
-					<form th:action="@{/user_info/show}" method="get">
+					<form th:action="@{/user-info/show}" method="get">
 						<br>
 						<button type="submit" class="btn btn-success btn-sm shadow-sm"sec:authorize="hasAuthority('USER')">ユーザー情報詳細</button>
 					</form>

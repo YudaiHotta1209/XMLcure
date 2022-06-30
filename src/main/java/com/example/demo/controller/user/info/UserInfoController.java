@@ -20,7 +20,7 @@ import com.example.demo.service.UserInfo.UserInfoService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/user_info")
+@RequestMapping("/user-info")
 @RequiredArgsConstructor
 public class UserInfoController {
 
@@ -32,7 +32,7 @@ public class UserInfoController {
 	// ①プロフィール登録画面
 	@GetMapping("/create")
 	public String showForm(@ModelAttribute("user_info") UserInfo userInfo, Model model) {
-		return "User_info/Create_userinfo";
+		return "Userinfo/Create-userinfo";
 	}
 
 	// ②プロフィール編集画面
@@ -40,7 +40,7 @@ public class UserInfoController {
 	public String show(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
 		UserInfo userInfo = userInfoService.selectOne(customUserDetails.getUsername());
 		model.addAttribute("user_info", userInfo);
-		return "User_info/Show_userinfo";
+		return "Userinfo/Show-userinfo";
 	}
 
 	// ③プロフィール詳細表示（画面遷移）
@@ -48,7 +48,7 @@ public class UserInfoController {
 	public String edit(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
 		UserInfo userInfo = userInfoService.selectOne(customUserDetails.getUsername());
 		model.addAttribute("user_info", userInfo);
-		return "User_info/Edit_userinfo";
+		return "Userinfo/Edit-userinfo";
 	}
 
 	// －－－－－－－－－－－－－－－－－－CRUD処理－－－－－－－－－－－－－－－－－－－－//
@@ -57,7 +57,7 @@ public class UserInfoController {
 	@PostMapping
 	public String create(@ModelAttribute("user_info") @Validated UserInfo userInfo, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "User_info/Edit_userinfo";
+			return "User-info/Edit-userinfo";
 		} else {
 			userInfoService.insert(userInfo);
 			return "redirect:/announcements";
@@ -69,7 +69,7 @@ public class UserInfoController {
 	public String edit(@PathVariable @AuthenticationPrincipal CustomUserDetails customUserDetails,
 			@ModelAttribute("user_info") UserInfo userInfo, Model model) {
 		model.addAttribute("user_info", userInfoService.selectOne(customUserDetails.getUsername()));
-		return "User_info/Edit_userinfo";
+		return "Userinfo/Edit-userinfo";
 	}
 
 	// ④更新処理（データ更新）
@@ -78,7 +78,7 @@ public class UserInfoController {
 			@ModelAttribute("user_info") @Validated UserInfo userInfo, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("user_info", userInfo);
-			return "User_info/Edit_userinfo";
+			return "Userinfo/Edit-userinfo";
 		} else {
 			userInfo.setUsername(customUserDetails.getUsername());
 			userInfoService.update(userInfo);
