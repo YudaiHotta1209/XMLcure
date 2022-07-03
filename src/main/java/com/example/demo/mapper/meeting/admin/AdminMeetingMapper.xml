@@ -5,9 +5,9 @@
 	
 	<select id="selectOne" resultType="com.example.demo.domain.Meeting.Meeting" >select*from meeting_info where id= #{id} </select>
 	
-	<insert id="insert" keyProperty="id" useGeneratedKeys="true">insert into meeting_info(roomid,username,people,owner,title,start,end,remarks,admin_comment) values(#{roomid}, #{username}, #{people},#{owner},#{title},#{start},#{end},#{remarks},#{admin_comment})</insert>
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">insert into meeting_info(roomid,username,people,owner,title,start,end,remarks,admincomment) values(#{roomid}, #{username}, #{people},#{owner},#{title},#{start},#{end},#{remarks},#{admincomment})</insert>
 	
-	<update id="update">update meeting_info set roomid=#{roomid}, username=#{username}, start=#{start},end=#{end},people=#{people}, owner=#{owner}, title=#{title},remarks=#{remarks},admin_comment=#{admin_comment} where id= #{id}</update>
+	<update id="update">update meeting_info set roomid=#{roomid}, username=#{username}, start=#{start},end=#{end},people=#{people}, owner=#{owner}, title=#{title},remarks=#{remarks},admincomment=#{admincomment} where id= #{id}</update>
 	
 	<delete id="delete">delete from meeting_info where id = #{id}</delete>
 </mapper>

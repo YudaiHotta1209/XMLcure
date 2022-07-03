@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS meeting_info(
   owner VARCHAR(64),
   people int(20),
   remarks VARCHAR(100)
+  admincomment VARCHAR()
 );
 
 
