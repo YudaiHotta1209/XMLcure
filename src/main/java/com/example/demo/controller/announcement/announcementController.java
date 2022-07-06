@@ -42,6 +42,7 @@ public class announcementController {
 	@GetMapping
 	public String list(Model model) {
 		List<Announcement>announcement = announcementService.findAll();		
+		System.out.println("【DEBUG】Announce_TEST01 : " +announcement);
 		model.addAttribute("announce_info", announcement);		
 		System.out.println("【DEBUG】Announce_TEST02 : " +announcement);
 		return "top-board";
